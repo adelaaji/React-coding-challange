@@ -5,7 +5,12 @@ const useInfiniteScroll = (callback) => {
 
   useEffect(() => {
     window.addEventListener("scroll", isScrolling);
-    return () => window.removeEventListener("scroll", isScrolling);
+    window.addEventListener("touchmove", isScrolling);
+
+    return () => {
+      window.removeEventListener("scroll", isScrolling);
+      window.removeEventListener("touchmove", isScrolling);
+    };
   }, []);
 
   useEffect(() => {

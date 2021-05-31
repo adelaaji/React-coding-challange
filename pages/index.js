@@ -7,7 +7,6 @@ import styles from "../styles/Index.module.scss";
 import Photo from "../components/Photo";
 import { ImSpinner9 } from "react-icons/im";
 
-//
 export default function Home() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -52,6 +51,7 @@ export default function Home() {
           <ImSpinner9 size={40} />
         </div>
       )}
+
       <div className={styles.mainContainer}>
         <div className={styles.photosGrid}>
           {data.map((photo, index) => (
