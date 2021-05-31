@@ -6,6 +6,7 @@ import useInfiniteScroll from "../hooks/useInfinite";
 import styles from "../styles/Index.module.scss";
 import Photo from "../components/Photo";
 import { ImSpinner9 } from "react-icons/im";
+import { Header } from "../components/Header";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -53,6 +54,7 @@ export default function Home() {
       )}
 
       <div className={styles.mainContainer}>
+        <Header></Header>
         <div className={styles.photosGrid}>
           {data.map((photo, index) => (
             <Photo photo={photo} key={index}></Photo>
