@@ -15,31 +15,27 @@ export default function Home() {
   const [errors, setErrors] = useState([]);
 
   /* custom hooks to run callback if page has end by scroll */
-  const [isFetching, setIsFetching] = useInfiniteScroll(loadMorePhotos);
+  const [isFetching, setIsFetching] = useInfiniteScroll(() => loadMorePhotos());
 
-  const getInitialPhotos = () => {
-    getPhotos()
-      .then((data) => {
-        data.originalResponse.ok ? setPhotos(data.response.results) : setErrors(data.errors);
-      })
-      .catch((error) => error.response && console.error(error.response.data));
+  const getInitialPhotos = async () => {
+    const { response, originalResponse, errors } = await getPhotos();
+    originalResponse.ok ? setPhotos(response.results) : setErrors(errors);
   };
 
   /* On page load  */
-  useEffect(() => getInitialPhotos(), []);
+  useEffect(async () => getInitialPhotos(), []);
 
   /* Callback will run if page has end */
-  function loadMorePhotos() {
-    getPhotos(page).then((data) => {
-      if (data.originalResponse.ok) {
-        setPhotos([...photos, ...data.response.results]);
-        setPage(page + 1);
-        setIsFetching(false);
-      } else {
-        setErrors(data.errors);
-      }
-    });
-  }
+  const loadMorePhotos = async () => {
+    const { response, originalResponse, errors } = await getPhotos(page);
+    if (originalResponse.ok) {
+      setPhotos([...photos, ...response.results]);
+      setPage(page + 1);
+      setIsFetching(false);
+    } else {
+      setErrors(errors);
+    }
+  };
 
   return (
     <div>
