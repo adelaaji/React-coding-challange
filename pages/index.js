@@ -9,36 +9,25 @@ import { ImSpinner9 } from "react-icons/im";
 import { Header } from "../components/Header";
 
 export default function Home() {
-  const [data, setData] = useState([]);
+  const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
-  const [isFetching, setIsFetching] = useInfiniteScroll(moreData);
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  /* custom hooks  */
+  const [isFetching, setIsFetching] = useInfiniteScroll(loadMorePhotos);
 
-  const loadData = () => {
-    getPhotos().then((data) => {
-      console.log("results", data.response.results);
-      setData(data.response.results);
-    });
-  };
+  const getInitialPhotos = () => getPhotos().then((data) => setPhotos(data.response.results));
 
-  function moreData() {
+  /* On page load   */
+  useEffect(() => getInitialPhotos(), []);
+
+  function loadMorePhotos() {
     getPhotos(page).then((res) => {
-      setData([...data, ...res.response.results]);
+      setPhotos([...photos, ...res.response.results]);
       setPage(page + 1);
       setIsFetching(false);
     });
-    // let url = `https://medrum.herokuapp.com/feeds/?source=5718e53e7a84fb1901e05971&page=${page}&sort=latest`;
-    // axios.get(url).then((res) => {
-    //   setData([...data, ...res.data]);
-    //   setPage(page + 1);
-    //   setTimeout(() => {
-    //     setIsFetching(false);
-    //   }, 4000);
-    // });
   }
+
   return (
     <div>
       <Head>
@@ -54,9 +43,10 @@ export default function Home() {
       )}
 
       <div className={styles.mainContainer}>
-        <Header></Header>
+        <Header />
+
         <div className={styles.photosGrid}>
-          {data.map((photo, index) => (
+          {photos.map((photo, index) => (
             <Photo photo={photo} key={index}></Photo>
           ))}
         </div>
@@ -64,10 +54,3 @@ export default function Home() {
     </div>
   );
 }
-// export async function getStaticProps(context) {
-//   const res = await getPhotos();
-//   let photos = res.response.results;
-//   return {
-//     props: { photos },
-//   };
-// }
