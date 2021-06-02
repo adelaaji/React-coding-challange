@@ -13,10 +13,6 @@ export const Header = () => {
 
       <div className={styles.moreInfo}>
         <h3>Heritage Gallery</h3>
-        <blockquote className={styles.blockquote}>
-          <strong>History </strong> is a gallery of pictures in which there are few originals and many copies
-        </blockquote>
-
         <div className={styles.socialMedia}>
           <AiOutlineInstagram size={25} color={"#777"} />
           <AiOutlineTwitter size={25} color={"#777"} />
@@ -30,6 +26,9 @@ export const Header = () => {
             {" 123"}
           </span>
         </div>
+        <blockquote className={styles.blockquote}>
+          <strong>History </strong> is a gallery of pictures in which there are few originals and many copies
+        </blockquote>
       </div>
     </header>
   );
