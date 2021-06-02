@@ -4,6 +4,6 @@ const unsplash = createApi({
   accessKey: UNSPLASH_ACCESS_KEY,
 });
 
-export const getPhotos = (page = 1, perPage = 50) => {
+export const getPhotos = (page = 1, perPage = 20) => {
   return unsplash.photos.list({ page, perPage });
 };

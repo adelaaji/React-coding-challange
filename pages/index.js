@@ -7,24 +7,37 @@ import styles from "../styles/Index.module.scss";
 import Photo from "../components/Photo";
 import { ImSpinner9 } from "react-icons/im";
 import { Header } from "../components/Header";
+import Errors from "../components/Errors";
 
 export default function Home() {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
+  const [errors, setErrors] = useState([]);
 
-  /* custom hooks  */
+  /* custom hooks to run callback if page has end by scroll */
   const [isFetching, setIsFetching] = useInfiniteScroll(loadMorePhotos);
 
-  const getInitialPhotos = () => getPhotos().then((data) => setPhotos(data.response.results));
+  const getInitialPhotos = () => {
+    getPhotos()
+      .then((data) => {
+        data.originalResponse.ok ? setPhotos(data.response.results) : setErrors(data.errors);
+      })
+      .catch((error) => error.response && console.error(error.response.data));
+  };
 
-  /* On page load   */
+  /* On page load  */
   useEffect(() => getInitialPhotos(), []);
 
+  /* Callback will run if page has end */
   function loadMorePhotos() {
-    getPhotos(page).then((res) => {
-      setPhotos([...photos, ...res.response.results]);
-      setPage(page + 1);
-      setIsFetching(false);
+    getPhotos(page).then((data) => {
+      if (data.originalResponse.ok) {
+        setPhotos([...photos, ...data.response.results]);
+        setPage(page + 1);
+        setIsFetching(false);
+      } else {
+        setErrors(data.errors);
+      }
     });
   }
 
@@ -44,6 +57,7 @@ export default function Home() {
 
       <div className={styles.mainContainer}>
         <Header />
+        {errors.length > 0 && <Errors errors={errors} />}
 
         <div className={styles.photosGrid}>
           {photos.map((photo, index) => (
