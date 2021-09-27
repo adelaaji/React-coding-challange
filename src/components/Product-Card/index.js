@@ -1,15 +1,15 @@
 /* eslint-disable */
 import React from 'react'
-import { Image, Header, Paragraph, Button } from '../../lib/bundle_sitecore.js'
+import { Container, Image, Header, Paragraph, Button } from '../../lib/bundle_sitecore.js'
 import PropTypes from 'prop-types'
 
 import './product-card.css'
 
 const ProductCard = (props) => {
   return (
-    <div className="product-card-container">
+    <Container className="product-card-container">
       <Image src={props.fields.src_object_1} className="product-card-image"></Image>
-      <div className="product-card-container1">
+      <Container className="product-card-container1">
         <Header text={props.fields.text_string_2} className="product-card-header"></Header>
         <Paragraph text={props.fields.text_string_3} className="product-card-paragraph"></Paragraph>
         <Button
@@ -17,8 +17,8 @@ const ProductCard = (props) => {
           link={props.fields.link_link_0}
           className="product-card-button"
         ></Button>
-      </div>
-    </div>
+      </Container>
+    </Container>
   )
 }
 
