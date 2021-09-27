@@ -1,14 +1,9 @@
 // prettier-ignore
 /* eslint-disable */
-import './bundle_sitecore.css';
+import "./bundle_sitecore.css"
 
 import React from 'react';
-
-import {
-  Image,
-  Link,
-  Text,
-} from '@sitecore-jss/sitecore-jss-react';
+import { Text, Image, Link } from '@sitecore-jss/sitecore-jss-react';
 
 const react$f = (props) => {
   return props.link
@@ -27,7 +22,16 @@ const react$e = (props) => {
 };
 
 const react$d = (props) => {
-  return React.createElement('div', { className: props.className });
+  const backgroundImage =
+    props && props.bgImage && props.bgImage.value ? props.bgImage.value.url : null;
+  return React.createElement(
+    'div',
+    {
+      className: props.className,
+      style: { backgroundImage: !!backgroundImage ? `url(${backgroundImage})` : 'none' },
+    },
+    [props.children]
+  );
 };
 
 const react$c = (props) => {
@@ -139,20 +143,20 @@ const react = (props) => {
 };
 
 export {
-  react as List,
-  react$1 as Dropdown,
-  react$2 as Paragraph,
-  react$3 as Linebreak,
-  react$4 as Video,
-  react$5 as Textinput,
-  react$6 as Textarea,
-  react$7 as Label,
-  react$8 as Radiobutton,
-  react$9 as Link,
-  react$a as Image,
-  react$b as Toggle,
-  react$c as Header,
-  react$d as Container,
-  react$e as Checkbox,
   react$f as Button,
+  react$e as Checkbox,
+  react$d as Container,
+  react$1 as Dropdown,
+  react$c as Header,
+  react$a as Image,
+  react$7 as Label,
+  react$3 as Linebreak,
+  react$9 as Link,
+  react as List,
+  react$2 as Paragraph,
+  react$8 as Radiobutton,
+  react$6 as Textarea,
+  react$5 as Textinput,
+  react$b as Toggle,
+  react$4 as Video,
 };

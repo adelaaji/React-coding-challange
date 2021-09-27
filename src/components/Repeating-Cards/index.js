@@ -1,41 +1,41 @@
 /* eslint-disable */
 import React from 'react'
-import { Paragraph, Image, Header } from '../../lib/bundle_sitecore.js'
+import { Container, Paragraph, Image, Header } from '../../lib/bundle_sitecore.js'
 import PropTypes from 'prop-types'
 
 import './repeating-cards.css'
 
 const RepeatingCards = (props) => {
   return (
-    <div className="repeating-cards-container">
-      <div className="repeating-cards-container1">
+    <Container className="repeating-cards-container">
+      <Container className="repeating-cards-container1">
         <Paragraph
           text={props.fields.text_string_7}
           className="repeating-cards-paragraph"
         ></Paragraph>
         <Image src={props.fields.src_object_2} className="repeating-cards-image"></Image>
-      </div>
-      <div className="repeating-cards-container2">
+      </Container>
+      <Container className="repeating-cards-container2">
         <Image src={props.fields.src_object_1} className="repeating-cards-image1"></Image>
-        <div className="repeating-cards-container3">
+        <Container className="repeating-cards-container3">
           <Header text={props.fields.text_string_4} className="repeating-cards-header"></Header>
           <Paragraph
             text={props.fields.text_string_6}
             className="repeating-cards-paragraph1"
           ></Paragraph>
-        </div>
-      </div>
-      <div className="repeating-cards-container4">
-        <div className="repeating-cards-container5">
+        </Container>
+      </Container>
+      <Container className="repeating-cards-container4">
+        <Container className="repeating-cards-container5">
           <Header text={props.fields.text_string_3} className="repeating-cards-header1"></Header>
           <Paragraph
             text={props.fields.text_string_5}
             className="repeating-cards-paragraph2"
           ></Paragraph>
-        </div>
+        </Container>
         <Image src={props.fields.src_object_0} className="repeating-cards-image2"></Image>
-      </div>
-    </div>
+      </Container>
+    </Container>
   )
 }
 
