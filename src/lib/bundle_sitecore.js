@@ -150,9 +150,11 @@ var Container = function Container(_ref) {
       rest = _objectWithoutProperties(_ref, _excluded$8);
 
   var backgroundImage = bgImage === null || bgImage === void 0 ? void 0 : (_bgImage$value = bgImage.value) === null || _bgImage$value === void 0 ? void 0 : _bgImage$value.src;
-  var containerStyle = backgroundImage ? _objectSpread2(_objectSpread2({}, style), {}, {
-    backgroundImage: "url(".concat(backgroundImage, ")")
-  }) : style;
+
+  var containerStyle = _objectSpread2(_objectSpread2({}, style), {}, {
+    backgroundImage: backgroundImage ? "url(".concat(backgroundImage, ")") : 'none'
+  });
+
   return /*#__PURE__*/React.createElement("div", _extends({
     style: containerStyle
   }, rest), children);
@@ -310,7 +312,7 @@ var _excluded = ["formId", "mode", "buttonText"];
 var validModes = ['popupButton', 'sliderButton', 'widget', 'popover'];
 
 var TypeForm = function TypeForm(props) {
-  var formId = props.formId,
+  var formId = props.formId.value,
       _props$mode = props.mode,
       mode = _props$mode === void 0 ? {} : _props$mode,
       buttonText = props.buttonText,
